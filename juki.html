@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juki Industrial Machines | SMX India</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --smx-blue:  #006699;
+            --smx-cyan:  #00a0e9;
+            --smx-green: #28a745;
+            --smx-dark:  #0b1d2e;
+            --glass-bg:  rgba(255, 255, 255, 0.95);
+        }
+
+        body { font-family: 'Montserrat', sans-serif; color: #444; overflow-x: hidden; background: #fcfcfc; }
+
+        .navbar {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 15px 0;
+            transition: all 0.4s ease;
+        }
+        .nav-link { font-weight: 600; color: var(--smx-blue) !important; transition: 0.3s; }
+        .nav-link:hover { color: var(--smx-cyan) !important; transform: translateY(-2px); }
+        .nav-link.active { color: var(--smx-cyan) !important; }
+        .btn-search {
+            border: 2px solid #006699;
+            color: #006699;
+            border-radius: 50px;
+            font-weight: bold;
+            padding: 5px 20px;
+            transition: 0.3s;
+        }
+        .btn-search:hover { background: #006699; color: white; }
+        .logo { height: 70px; }
+
+        .hero-carousel {
+            background: url("juki.png") center/cover no-repeat;
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-carousel::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(0,102,153,0.88), rgba(0,160,233,0.78));
+        }
+        .hero-carousel .container { position: relative; z-index: 2; }
+        .hero-title { font-size: 4rem; font-weight: 700; }
+        .machine-img {
+            filter: drop-shadow(0 30px 50px rgba(0,0,0,0.3));
+            animation: float 6s ease-in-out infinite;
+            max-height: 320px;
+        }
+        @keyframes float {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .intro-strip { background: #28a745; border-bottom: 1px solid #eee; padding: 32px 0; }
+        .intro-item { border-right: 1px solid rgba(255,255,255,0.25); }
+        .intro-item:last-child { border-right: none; }
+        .intro-item i { color: white; font-size: 1.6rem; margin-bottom: 8px; }
+        .intro-item h6 { font-weight: 700; font-size: 0.85rem; color: white; margin-bottom: 2px; }
+        .intro-item p { font-size: 0.78rem; color: white; margin: 0; }
+
+        .about-section { background: #f8f9fa; padding: 65px 0; }
+        .section-label {
+            font-size: 11px; font-weight: 700; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--smx-cyan);
+            display: block; margin-bottom: 10px;
+        }
+        .accent-bar {
+            width: 50px; height: 4px;
+            background: linear-gradient(90deg, var(--smx-blue), var(--smx-cyan));
+            border-radius: 2px; margin-bottom: 22px;
+        }
+        .img-showcase { border-radius: 14px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,102,153,0.13); position: relative; }
+        .img-showcase img { width: 100%; height: 340px; object-fit: cover; display: block; }
+        .img-overlay-badge {
+            position: absolute; bottom: 20px; left: 20px;
+            background: rgba(0,102,153,0.92); color: white;
+            padding: 10px 18px; border-radius: 8px;
+            font-size: 12px; font-weight: 700;
+        }
+
+        .filter-bar {
+            background: white;
+            border-bottom: 1px solid #eee;
+            padding: 16px 0;
+            position: sticky; top: 88px; z-index: 10;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+        }
+        .filter-btn {
+            border: 1.5px solid #ddd; background: white; color: #555;
+            border-radius: 50px; padding: 6px 18px;
+            font-size: 12px; font-weight: 600; cursor: pointer;
+            transition: 0.25s; font-family: 'Montserrat', sans-serif;
+        }
+        .filter-btn:hover, .filter-btn.active { background: var(--smx-blue); color: white; border-color: var(--smx-blue); }
+        .results-count { font-size: 13px; color: #888; font-weight: 500; }
+
+        .product-section { background: #f4f6f9; padding: 55px 0 75px; }
+
+        .product-card {
+            background: white; border-radius: 16px;
+            border: 1.5px solid #eee; overflow: hidden;
+            height: 100%; display: flex; flex-direction: column;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 22px 50px rgba(0,102,153,0.13);
+            border-color: var(--smx-cyan);
+        }
+        .product-img-wrap {
+            background: #f9fbfd; height: 210px;
+            display: flex; align-items: center; justify-content: center;
+            padding: 28px; position: relative; overflow: hidden;
+        }
+        .product-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; transition: 0.5s; }
+        .product-card:hover .product-img-wrap img { transform: scale(1.08); }
+
+        .prod-tag {
+            position: absolute; top: 12px; left: 12px;
+            background: var(--smx-cyan); color: white;
+            font-size: 10px; font-weight: 700;
+            padding: 3px 10px; border-radius: 50px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .prod-tag.lockstitch   { background: var(--smx-blue); }
+        .prod-tag.two-needle   { background: #1a6b8a; }
+        .prod-tag.overlock     { background: #c0392b; }
+        .prod-tag.bartack      { background: #e07b00; }
+        .prod-tag.buttonhole   { background: #7b2fbe; }
+        .prod-tag.button       { background: #2e7d32; }
+        .prod-tag.coverstitch  { background: #00796b; }
+        .prod-tag.zigzag       { background: #5c6bc0; }
+        .prod-tag.automatic    { background: #6d4c41; }
+        .prod-tag.nonapparel   { background: #37474f; }
+        .prod-tag.digital      { background: #0288d1; }
+        .prod-tag.special      { background: #7b2fbe; }
+
+        .product-body {
+            padding: 18px 20px 22px; flex: 1;
+            display: flex; flex-direction: column;
+            border-top: 1px solid #f0f0f0;
+        }
+        .product-body h3 { font-size: 14px; font-weight: 700; color: var(--smx-dark); margin-bottom: 7px; line-height: 1.45; }
+        .product-body p { font-size: 12px; color: #888; line-height: 1.65; flex: 1; margin-bottom: 16px; }
+        .btn-enquire {
+            background: transparent; border: 1.5px solid var(--smx-blue);
+            color: var(--smx-blue); font-size: 12px; font-weight: 700;
+            border-radius: 50px; padding: 7px 18px; transition: 0.3s;
+            text-decoration: none; display: inline-block; align-self: flex-start;
+            font-family: 'Montserrat', sans-serif; cursor: pointer;
+        }
+        .btn-enquire:hover { background: var(--smx-blue); color: white; }
+
+        .why-banner { background: var(--smx-blue); padding: 70px 0; color: white; }
+        .why-icon {
+            width: 65px; height: 65px;
+            background: rgba(0,160,233,0.15);
+            border: 1.5px solid rgba(0,160,233,0.3);
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 18px;
+        }
+        .why-icon i { color: white; font-size: 1.5rem; }
+        .why-card { padding: 30px 20px; border-right: 1px solid rgba(255,255,255,0.08); }
+        .why-card:last-child { border-right: none; }
+        .why-card h6 { font-weight: 700; font-size: 0.95rem; margin-bottom: 8px; }
+        .why-card p { font-size: 0.82rem; opacity: 0.65; line-height: 1.7; margin: 0; }
+
+        .features-strip { background: var(--smx-green); padding: 45px 0; color: white; }
+        .fstrip-item { border-right: 1px solid rgba(255,255,255,0.2); }
+        .fstrip-item:last-child { border-right: none; }
+        .fstrip-icon {
+            width: 58px; height: 58px;
+            background: rgba(255,255,255,0.15); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 13px; font-size: 1.3rem;
+        }
+
+        .main-footer {
+            background: #0b1d2e;
+            padding: 80px 0 20px;
+            position: relative;
+            color: white;
+        }
+        .footer-heading {
+            color: #ffffff;
+            text-transform: uppercase; letter-spacing: 2px;
+            margin-bottom: 30px; font-weight: 700;
+            border-bottom: 2px solid var(--smx-cyan);
+            display: inline-block; padding-bottom: 5px;
+        }
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none; transition: 0.3s;
+            display: block; margin-bottom: 10px;
+        }
+        .footer-links a:hover { color: var(--smx-cyan); transform: translateX(5px); }
+        .footer-contact-info i { color: var(--smx-cyan); }
+        .main-footer .btn-outline-light { border-color: rgba(255,255,255,0.5); }
+        .main-footer .btn-outline-light:hover { background-color: var(--smx-green); border-color: var(--smx-green); }
+        .main-footer img { max-width: 100px; height: auto; }
+
+        /* ---- SINGLE SHARED MODAL ---- */
+        #productModal .modal-content { border-radius: 16px; overflow: hidden; }
+        #productModal .modal-body { padding: 0; }
+        #productModal .modal-header {
+            background: var(--smx-blue); color: white;
+            border-radius: 0; padding: 16px 24px;
+        }
+        #productModal .modal-header .btn-close { filter: invert(1); }
+        #pImage { max-height: 340px; object-fit: contain; width: 100%; }
+        #pSpecs td { font-size: 12px; padding: 5px 8px; }
+        #pSpecs td:first-child { font-weight: 600; color: #555; width: 40%; }
+        .modal-img-wrap {
+            background: #f9fbfd; padding: 28px;
+            display: flex; align-items: center; justify-content: center;
+            min-height: 300px; border-right: 1px solid #eee;
+        }
+
+        /* category section headings in product grid */
+        .cat-heading {
+            font-size: 13px; font-weight: 800; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--smx-blue);
+            border-left: 4px solid var(--smx-cyan);
+            padding-left: 12px; margin: 36px 0 18px;
+            width: 100%;
+        }
+        .cat-heading:first-child { margin-top: 0; }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <img src="smx.jpg" class="logo" alt="SMX India">
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#smxNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="smxNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="aboutus.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="silversun.html">Silversun</a></li>
+                <li class="nav-item"><a class="nav-link" href="cerliani.html">Cerliani</a></li>
+                <li class="nav-item"><a class="nav-link active" href="juki.html">Juki</a></li>
+                <li class="nav-item"><a class="nav-link" href="richpeace.html">Richpeace</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            </ul>
+            <a href="#" class="btn btn-search"><i class="fa-solid fa-magnifying-glass me-2"></i>Search</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero-carousel">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6" data-aos="fade-right">
+                <h1 class="hero-title text-white mb-4">Juki Industrial<br>Sewing Machines</h1>
+                <p class="lead text-white opacity-75 mb-4">
+                    Precision Japanese Engineering — Trusted by Garment Factories Worldwide
+                </p>
+                <a href="#products" class="btn btn-light btn-lg rounded-pill fw-bold px-5" style="color:var(--smx-blue);">
+                    <i class="fa-solid fa-arrow-down me-2"></i>View Products
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</header>
+
+<!-- INTRO STRIP -->
+<div class="intro-strip">
+    <div class="container">
+        <div class="row text-center g-3">
+            <div class="col-6 col-md-3 intro-item" data-aos="fade-up" data-aos-delay="50">
+                <i class="fa-solid fa-flag mb-2 d-block"></i>
+                <h6>Made in Japan</h6>
+                <p>Genuine Juki Machines</p>
+            </div>
+            <div class="col-6 col-md-3 intro-item" data-aos="fade-up" data-aos-delay="100">
+                <i class="fa-solid fa-circle-check mb-2 d-block"></i>
+                <h6>ISO Certified</h6>
+                <p>Industry Standard Quality</p>
+            </div>
+            <div class="col-6 col-md-3 intro-item" data-aos="fade-up" data-aos-delay="150">
+                <i class="fa-solid fa-truck-fast mb-2 d-block"></i>
+                <h6>Pan-India Delivery</h6>
+                <p>Fast &amp; Safe Shipping</p>
+            </div>
+            <div class="col-6 col-md-3 intro-item" data-aos="fade-up" data-aos-delay="200">
+                <i class="fa-solid fa-headset mb-2 d-block"></i>
+                <h6>After-Sales Support</h6>
+                <p>Dedicated Service Team</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABOUT JUKI -->
+<section class="about-section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="img-showcase">
+                    <img src="https://juki.com/media/catalog/product/cache/2b497b866f8a9f887e9640d769ece67d/d/d/ddl9000c_photo1.jpg"
+                         alt="Juki Machine"
+                         onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    <div class="img-overlay-badge"><i class="fa-solid fa-industry me-2"></i>Industrial Grade</div>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <span class="section-label">About Juki</span>
+                <div class="accent-bar"></div>
+                <h2 class="fw-bold mb-4" style="font-size:2rem; color:var(--smx-dark);">
+                    Japan's No.1 Industrial<br>Sewing Machine Brand
+                </h2>
+                <p style="font-size:0.92rem; color:#666; line-height:1.8;" class="mb-3">
+                    Juki Corporation, founded in 1938 in Japan, is the world's leading manufacturer of industrial sewing machines. Trusted by garment factories across 170+ countries, Juki machines are synonymous with speed, reliability, and precision stitch quality.
+                </p>
+                <p style="font-size:0.92rem; color:#666; line-height:1.8;" class="mb-4">
+                    SMX India is a proud distributor of Juki machines in Mumbai and across India, offering the full range from high-speed lockstitch to specialized overlock, bartack, and computerized machines.
+                </p>
+                <div class="d-flex gap-4 flex-wrap">
+                    <div>
+                        <h4 class="fw-bold mb-0" style="color:var(--smx-blue);">85+</h4>
+                        <small style="color:#888;">Years of Innovation</small>
+                    </div>
+                    <div>
+                        <h4 class="fw-bold mb-0" style="color:var(--smx-blue);">170+</h4>
+                        <small style="color:#888;">Countries Served</small>
+                    </div>
+                    <div>
+                        <h4 class="fw-bold mb-0" style="color:var(--smx-blue);">500+</h4>
+                        <small style="color:#888;">Machine Models</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-bar" id="products">
+    <div class="container d-flex align-items-center justify-content-between flex-wrap gap-2">
+        <div class="d-flex gap-2 flex-wrap">
+            <button class="filter-btn active" onclick="filterCards('all', this)">All Products</button>
+            <button class="filter-btn" onclick="filterCards('lockstitch', this)">Lockstitch</button>
+            <button class="filter-btn" onclick="filterCards('two-needle', this)">2-Needle</button>
+            <button class="filter-btn" onclick="filterCards('overlock', this)">Overlock</button>
+            <button class="filter-btn" onclick="filterCards('bartack', this)">Bartack</button>
+            <button class="filter-btn" onclick="filterCards('buttonhole', this)">Buttonhole</button>
+            <button class="filter-btn" onclick="filterCards('button', this)">Button Sewing</button>
+            <button class="filter-btn" onclick="filterCards('coverstitch', this)">Coverstitch</button>
+            <button class="filter-btn" onclick="filterCards('zigzag', this)">Zigzag</button>
+            <button class="filter-btn" onclick="filterCards('automatic', this)">Automatic</button>
+            <button class="filter-btn" onclick="filterCards('nonapparel', this)">Non-Apparel</button>
+            <button class="filter-btn" onclick="filterCards('digital', this)">Digital</button>
+        </div>
+        <span class="results-count" id="results-count">Showing all products</span>
+    </div>
+</div>
+
+<!-- PRODUCT GRID -->
+<section class="product-section">
+    <div class="container">
+        <div class="row g-4" id="productGrid">
+
+            <!-- ===== SECTION: 1-NEEDLE LOCKSTITCH ===== -->
+            <div class="col-12"><div class="cat-heading">1-Needle Lockstitch Machines</div></div>
+
+            <!-- DDL-9000C Series -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="lockstitch" data-aos="fade-up" data-aos-delay="50">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag lockstitch">Lockstitch</span>
+                        <img src="https://juki.com/media/catalog/product/cache/2b497b866f8a9f887e9640d769ece67d/d/d/ddl9000c_photo1.jpg" alt="Juki DDL-9000C Series">
+                    </div>
+                    <div class="product-body">
+                        <h3>DDL-9000C Series</h3>
+                        <p>Direct-drive, high-speed sewing system with automatic thread trimmer. Full digital type with active needle tension and presser foot pressure control. Speed: 5,000 SPM.</p>
+                        <button class="btn-enquire" onclick="openModal('DDL-9000C Series','https://juki.com/media/catalog/product/cache/2b497b866f8a9f887e9640d769ece67d/d/d/ddl9000c_photo1.jpg','Lockstitch','Single Needle Lockstitch','5,000 sti/min','5 mm','Semi-dry / Minute-quantity','Direct-drive, high-speed sewing system with automatic thread trimmer. Full digital type with active needle tension and presser foot pressure control. Available in medium and heavy-weight versions.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DDL-8700 -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="lockstitch" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag lockstitch">Lockstitch</span>
+                        <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQk0QqwHHZmLHkbV-N-ldrULRajxINsbD30zzoLDxZ32E8V0D2526E84_eKIpezYSC8ORnKQpKk8DAM9nNKxHltys13wbSHpTW9j6wZsDJ4XvkV0veAgZeTGmyICrULMgnOhYht5QDFCKM&usqp=CAc" alt="Juki DDL-8700" onerror="this.src='https://m.media-amazon.com/images/I/51NTX4GbnwL._AC_UF894,1000_QL80_.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>DDL-8700</h3>
+                        <p>High-speed 1-needle lockstitch machine with energy-saving direct-drive motor. Speed: 5,500 SPM. Low vibration and noise, ideal for light to medium fabrics.</p>
+                        <button class="btn-enquire" onclick="openModal('DDL-8700','https://m.media-amazon.com/images/I/51NTX4GbnwL._AC_UF894,1000_QL80_.jpg','Lockstitch','Single Needle Lockstitch','5,500 sti/min','5 mm','Automatic','Standard high-speed 1-needle lockstitch machine with direct-drive motor. Known for low vibration, high efficiency, and consistent stitch quality.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DDL-8700-7/SC920C/M92 -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="lockstitch" data-aos="fade-up" data-aos-delay="150">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag lockstitch">Lockstitch</span>
+                        <img src="https://juki.com/media/catalog/product/d/d/ddl87007sc920cm92.jpg" alt="DDL-8700-7" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>DDL-8700-7/SC920C/M92</h3>
+                        <p>High-speed 1-needle lockstitch with SC920C controller and M92 servo motor. Energy-saving operation with programmable settings for production efficiency.</p>
+                        <button class="btn-enquire" onclick="openModal('DDL-8700-7/SC920C/M92','https://juki.com/media/catalog/product/d/d/ddl87007sc920cm92.jpg','Lockstitch','Single Needle Lockstitch','5,500 sti/min','5 mm','Automatic','High-speed 1-needle lockstitch with SC920C controller and M92 servo motor. Energy-saving operation with programmable controller settings.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DLN-9010A -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="lockstitch" data-aos="fade-up" data-aos-delay="200">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag lockstitch">Lockstitch</span>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0--foXc5lJp-U-npfdKDWzTsk2S1cPllvGg&s" alt="DLN-9010A" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>DLN-9010A</h3>
+                        <p>Needle-feed lockstitch machine for heavy and layered fabrics. Ensures perfect seam alignment in multi-layer garment construction.</p>
+                        <button class="btn-enquire" onclick="openModal('DLN-9010A','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0--foXc5lJp-U-npfdKDWzTsk2S1cPllvGg&s','Lockstitch','Needle-Feed Lockstitch','4,500 sti/min','5 mm','Automatic','Needle-feed lockstitch machine ideal for heavy, layered, and difficult-to-feed materials. Ensures perfect stitch alignment across multi-layer construction.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DDL-8000C -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="lockstitch" data-aos="fade-up" data-aos-delay="250">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag lockstitch">Lockstitch</span>
+                        <img src="https://petersew.com.au/wp-content/uploads/2025/08/DDL8000C_20_1024x1024.webp" alt="DDL-8000C" onerror="this.src='https://5.imimg.com/data5/ZF/SA/IV/SELLER-17369446/juki-ddl-8000a-series-direct-drive-1-needle-auto-lifter-motor-driven.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>DDL-8000C</h3>
+                        <p>Computerized 1-needle lockstitch machine with direct-drive motor and automatic thread trimmer. Built-in panel for easy operation settings.</p>
+                        <button class="btn-enquire" onclick="openModal('DDL-8000C','https://petersew.com.au/wp-content/uploads/2025/08/DDL8000C_20_1024x1024.webp','Lockstitch','Computerized Single Needle Lockstitch','5,000 sti/min','5 mm','Semi-dry','Computerized 1-needle lockstitch machine with built-in control panel, automatic thread trimmer, and presser foot lifter for high-productivity garment manufacturing.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DX-01 -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="lockstitch" data-aos="fade-up" data-aos-delay="300">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag lockstitch">Lockstitch</span>
+                        <img src="https://api.jukieurope.com/file/stream/285902d0-6630-11f0-a0e5-0cc47a82bb04" alt="DX-01" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>DX-01</h3>
+                        <p>Next-generation intelligent lockstitch machine. AI-assisted sewing with automatic material detection and self-adjusting parameters for consistent quality.</p>
+                        <button class="btn-enquire" onclick="openModal('DX-01','https://api.jukieurope.com/file/stream/285902d0-6630-11f0-a0e5-0cc47a82bb04','Lockstitch','AI-Intelligent Lockstitch','5,000 sti/min','5 mm','Semi-dry','Next-generation intelligent lockstitch machine with AI-assisted sewing. Automatic material detection and self-adjusting parameters ensure consistent seam quality across fabric types.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DDL-7000A Series -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="lockstitch" data-aos="fade-up" data-aos-delay="350">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag lockstitch">Lockstitch</span>
+                        <img src="https://5.imimg.com/data5/SELLER/Default/2023/8/334817038/UH/PW/GL/181839349/juki-ddl-7000a-a-industrial-sewing-machine.png" alt="DDL-7000A Series" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>DDL-7000A Series</h3>
+                        <p>Automatic lockstitch with auto thread trimmer and programmable backtacking. Ideal for high-volume production with auto presser foot lifter.</p>
+                        <button class="btn-enquire" onclick="openModal('DDL-7000A Series','https://5.imimg.com/data5/SELLER/Default/2023/8/334817038/UH/PW/GL/181839349/juki-ddl-7000a-a-industrial-sewing-machine.png','Lockstitch','Automatic Lockstitch','5,000 sti/min','5 mm','Semi-dry','Automatic lockstitch machine with auto thread trimmer and programmable backtacking. High-volume production with auto presser foot lifter and direct-drive motor.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DMN-5420N-7 -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="lockstitch" data-aos="fade-up" data-aos-delay="400">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag lockstitch">Lockstitch</span>
+                        <img src="https://www.juki.co.jp/industrial_e/admin/pdata/productphoto/20210224_045207_01.jpg" alt="DMN-5420N-7" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>DMN-5420N-7</h3>
+                        <p>Double-needle feed lockstitch machine for heavy fabrics. Perfect for denim, canvas, and upholstery applications requiring precise double-row stitching.</p>
+                        <button class="btn-enquire" onclick="openModal('DMN-5420N-7','https://www.juki.co.jp/industrial_e/admin/pdata/productphoto/20210224_045207_01.jpg','Lockstitch','Needle-Feed Lockstitch (Heavy Duty)','4,000 sti/min','5 mm','Automatic','Double-needle feed lockstitch machine designed for heavy fabrics like denim, canvas, and upholstery requiring precise multi-layer stitching.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SECTION: 2-NEEDLE LOCKSTITCH ===== -->
+            <div class="col-12"><div class="cat-heading">2-Needle Lockstitch Machines</div></div>
+
+            <!-- LH-3528A -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="two-needle" data-aos="fade-up" data-aos-delay="50">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag two-needle">2-Needle</span>
+                        <img src="https://5.imimg.com/data5/SELLER/Default/2025/4/500435482/JD/GI/JP/242135355/juki-lh-3528a-7-semi-dry-double-needle-lockstitch-sewing-machining.jpg" alt="LH-3528A" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>LH-3528A-7 / LH-3528A</h3>
+                        <p>2-needle lockstitch machine for parallel stitch lines on shirts, trousers and waistbands. High-speed with programmable backtacking function.</p>
+                        <button class="btn-enquire" onclick="openModal('LH-3528A-7 / LH-3528A','https://5.imimg.com/data5/SELLER/Default/2025/4/500435482/JD/GI/JP/242135355/juki-lh-3528a-7-semi-dry-double-needle-lockstitch-sewing-machining.jpg','2-Needle Lockstitch','2-Needle Lockstitch','4,200 sti/min','5 mm','Automatic','2-needle lockstitch machine for producing parallel stitch lines on shirts, trousers, and waistbands. High-speed operation with programmable backtacking and thread trimmer.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LH-3578A -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="two-needle" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag two-needle">2-Needle</span>
+                        <img src="https://cdn11.bigcommerce.com/s-3pte0u8smt/images/stencil/1280x1280/products/287/122609/juki-juki-lh-3578a-g-semi-dry-head-heavy-weight-double-needle-lockstitch-industrial-sewing-machine-with-table-and-servo-motor__83580.1741886542.jpg?c=1" alt="LH-3578A" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>LH-3578A-7 / LH-3578A</h3>
+                        <p>Needle-feed 2-needle lockstitch machine for thick fabrics. Ideal for jeans, jackets, and heavy-duty garments requiring even dual-row feed.</p>
+                        <button class="btn-enquire" onclick="openModal('LH-3578A-7 / LH-3578A','https://cdn11.bigcommerce.com/s-3pte0u8smt/images/stencil/1280x1280/products/287/122609/juki-juki-lh-3578a-g-semi-dry-head-heavy-weight-double-needle-lockstitch-industrial-sewing-machine-with-table-and-servo-motor__83580.1741886542.jpg?c=1','2-Needle Lockstitch','2-Needle Needle-Feed Lockstitch','4,000 sti/min','5 mm','Automatic','Needle-feed 2-needle lockstitch machine suitable for thick fabrics including jeans, jackets, and heavy-duty garments requiring uniform dual-row stitching.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LH-4500C Series -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="two-needle" data-aos="fade-up" data-aos-delay="150">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag two-needle">2-Needle</span>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSY-olV0HMnrU6NdjrpH0l9LTDfWceMZm-OQ&s" alt="LH-4500C Series" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>LH-4500C Series</h3>
+                        <p>Computerized 2-needle lockstitch for precise stitch-width settings. Digital control panel with multiple stitch patterns and programmable sewing parameters.</p>
+                        <button class="btn-enquire" onclick="openModal('LH-4500C Series','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSY-olV0HMnrU6NdjrpH0l9LTDfWceMZm-OQ&s','2-Needle Lockstitch','Computerized 2-Needle Lockstitch','4,200 sti/min','5 mm','Semi-dry','Computerized 2-needle lockstitch machine with digital control for precise stitch-width settings, multiple patterns, and programmable sewing parameters.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SECTION: OVERLOCK ===== -->
+            <div class="col-12"><div class="cat-heading">Overlock / Safety Stitch Machines</div></div>
+
+            <!-- MO-6700DA Series -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="overlock" data-aos="fade-up" data-aos-delay="50">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag overlock">Overlock</span>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRywAkxHSHhi8_noqiJPVZDIEy6v2LsGVwuYQ&s" alt="MO-6700DA Series" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/11/KN/KS/GX/9180629/juki-mo-6814-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>MO-6700DA Series</h3>
+                        <p>High-speed overlock/safety stitch machine with direct-drive motor. Speed: 8,000 SPM. Exceptional seam strength for knitwear and sportswear.</p>
+                        <button class="btn-enquire" onclick="openModal('MO-6700DA Series','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRywAkxHSHhi8_noqiJPVZDIEy6v2LsGVwuYQ&s','Overlock','Overlock / Safety Stitch','8,000 sti/min','0.6–4.5 mm','Semi-dry','High-speed overlock/safety stitch machine with direct-drive motor. Provides strong elastic seams for knitwear, T-shirts, and sportswear.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MO-6900G Series -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="overlock" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag overlock">Overlock</span>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQghfc0zVsygO_KBdOuHJLD63ivbZdnG2butA&s" alt="MO-6900G Series" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/11/KN/KS/GX/9180629/juki-mo-6814-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>MO-6900G Series</h3>
+                        <p>Advanced overlock with differential feed mechanism and multi-thread configurations (3–5 thread). Ideal for both apparel and non-apparel applications.</p>
+                        <button class="btn-enquire" onclick="openModal('MO-6900G Series','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQghfc0zVsygO_KBdOuHJLD63ivbZdnG2butA&s','Overlock','3–5 Thread Overlock','8,000 sti/min','0.8–4.5 mm','Automatic','Advanced overlock with differential feed mechanism and multi-thread configurations. Suitable for both apparel and non-apparel applications requiring clean edge finishing.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MO-6900J Series -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="overlock" data-aos="fade-up" data-aos-delay="150">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag overlock">Overlock</span>
+                        <img src="https://www.tekin-group.com/kepek/termekek/3/9/2/54_430x280t1_ic.jpg" alt="MO-6900J Series" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/11/KN/KS/GX/9180629/juki-mo-6814-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>MO-6900J Series</h3>
+                        <p>Overlock machine with automatic lubrication and IoT connectivity. Real-time monitoring and data management through Juki's smart network system.</p>
+                        <button class="btn-enquire" onclick="openModal('MO-6900J Series','https://www.tekin-group.com/kepek/termekek/3/9/2/54_430x280t1_ic.jpg','Overlock','Smart Overlock with IoT','7,500 sti/min','0.8–4.5 mm','Automatic','Overlock with automatic lubrication and IoT connectivity. Real-time monitoring and data management through Juki smart network for connected factories.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MO-6900S Series -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="overlock" data-aos="fade-up" data-aos-delay="200">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag overlock">Overlock</span>
+                        <img src="https://cpimg.tistatic.com/09084908/b/4/MF-7912DRH24-Bottom-Coverstitch-Machine.jpg" alt="MO-6900S Series" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/11/KN/KS/GX/9180629/juki-mo-6814-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>MO-6900S Series</h3>
+                        <p>Safety stitch overlock for strong seam construction. Combines chain stitch and overlock in a single pass for superior seam integrity on heavy garments.</p>
+                        <button class="btn-enquire" onclick="openModal('MO-6900S Series','https://cpimg.tistatic.com/09084908/b/4/MF-7912DRH24-Bottom-Coverstitch-Machine.jpg','Overlock','Safety Stitch Overlock','7,000 sti/min','0.8–5 mm','Automatic','Safety stitch overlock combining chain stitch and overlock in a single pass. Provides superior seam integrity for heavy garments and workwear.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MO-6800A Series -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="overlock" data-aos="fade-up" data-aos-delay="250">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag overlock">Overlock</span>
+                        <img src="https://i.ytimg.com/vi/YTF61KRoRoU/maxresdefault.jpg" alt="MO-6800A Series" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/11/KN/KS/GX/9180629/juki-mo-6814-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>MO-6800A Series</h3>
+                        <p>4/5-thread overlock with automatic threading and adjustable differential feed. Excellent for stretch fabrics, knitwear, and elasticated seam finishing.</p>
+                        <button class="btn-enquire" onclick="openModal('MO-6800A Series','https://i.ytimg.com/vi/YTF61KRoRoU/maxresdefault.jpg','Overlock','4/5-Thread Overlock','7,000 sti/min','0.6–4 mm','Semi-dry (Oil Stain Prevention)','4/5-thread overlock with automatic threading and differential feed adjustment. Excellent for stretch fabrics, knitwear, and elasticated seam finishing.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SECTION: BARTACK ===== -->
+            <div class="col-12"><div class="cat-heading">Bartacking Machines</div></div>
+
+            <!-- LK-1900BN Series -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="bartack" data-aos="fade-up" data-aos-delay="50">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag bartack">Bartack</span>
+                        <img src="https://tiimg.tistatic.com/fp/1/009/110/juki-lk-1900bn-ss-motor-operated-sewing-machine-818.jpg" alt="LK-1900BN Series" onerror="this.src='https://cdn.wotol.com/xVK3qz05aNbarH0uFvkL3_kF0XM=/fit-in/750x750/media%2Fpictures%2F95e%2F95e12bc6-78a3-4a82-96f8-9bbe689bd3d2.jpeg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>LK-1900BN Series</h3>
+                        <p>Computerized high-speed bartack machine with 50+ built-in patterns. Ideal for belt loops, pocket corners, zip reinforcement. Speed: 3,200 SPM.</p>
+                        <button class="btn-enquire" onclick="openModal('LK-1900BN Series','https://tiimg.tistatic.com/fp/1/009/110/juki-lk-1900bn-ss-motor-operated-sewing-machine-818.jpg','Bartack','Computerized Bartack','3,200 sti/min','0.1–40 mm','Semi-dry','Computerized high-speed bartack machine with 50+ built-in patterns. Used for belt loops, pocket corners, zipper reinforcement, and other tack points.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LK-1900C Series -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="bartack" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag bartack">Bartack</span>
+                        <img src="https://www.juki.co.jp/industrial_e/admin/pdata/upload/images/LK1901C.jpg" alt="LK-1900C Series" onerror="this.src='https://cdn.wotol.com/xVK3qz05aNbarH0uFvkL3_kF0XM=/fit-in/750x750/media%2Fpictures%2F95e%2F95e12bc6-78a3-4a82-96f8-9bbe689bd3d2.jpeg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>LK-1900C Series</h3>
+                        <p>Advanced computerized bartack with colour touch panel and enhanced programmability. Supports complex tack patterns for high-fashion and denim applications.</p>
+                        <button class="btn-enquire" onclick="openModal('LK-1900C Series','https://www.juki.co.jp/industrial_e/admin/pdata/upload/images/LK1901C.jpg','Bartack','Advanced Computerized Bartack','3,200 sti/min','0.1–40 mm','Semi-dry','Advanced computerized bartack with colour touchscreen panel. Supports complex tack patterns for high-fashion and denim applications with enhanced programmability.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SECTION: BUTTONHOLE ===== -->
+            <div class="col-12"><div class="cat-heading">Buttonholing Machines</div></div>
+
+            <!-- LBH-1790AN Series -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="buttonhole" data-aos="fade-up" data-aos-delay="50">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag buttonhole">Buttonhole</span>
+                        <img src="https://cpimg.tistatic.com/11787991/b/4/Juki-LBH-1790AN-Button-Hole-Sewing-Machine..webp" alt="LBH-1790AN" onerror="this.src='https://apparelresources.com/wp-content/uploads/2014/11/juki1-copy.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>LBH-1790AN Series</h3>
+                        <p>Computerized buttonhole machine supporting 30+ stitch patterns. Precise and consistent buttonhole quality for shirts, trousers, and uniforms. Speed: 4,200 SPM.</p>
+                        <button class="btn-enquire" onclick="openModal('LBH-1790AN Series','https://cpimg.tistatic.com/11787991/b/4/Juki-LBH-1790AN-Button-Hole-Sewing-Machine..webp','Buttonhole','Computerized Buttonhole','4,200 sti/min','0.5–40 mm (Buttonhole Length)','Semi-dry','Computerized buttonhole machine supporting 30+ stitch patterns. Ensures precise, consistent buttonholes for shirts, trousers, and uniforms with automatic thread trimming.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MEB-3200C -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="buttonhole" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag buttonhole">Buttonhole</span>
+                        <img src="https://balajisewing.com/wp-content/uploads/2023/11/1-27.jpg.webp" alt="MEB-3200C" onerror="this.src='https://apparelresources.com/wp-content/uploads/2014/11/juki1-copy.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>MEB-3200C</h3>
+                        <p>Electronic eyelet buttonhole machine for suits, coats, and workwear. Produces round-end and square-end buttonholes with high stitch density and consistent quality.</p>
+                        <button class="btn-enquire" onclick="openModal('MEB-3200C','https://balajisewing.com/wp-content/uploads/2023/11/1-27.jpg.webp','Buttonhole','Electronic Eyelet Buttonhole','3,500 sti/min','Up to 48 mm (length)','Automatic','Electronic eyelet buttonhole machine for suits, coats, and workwear. Produces round-end and square-end buttonholes with consistent high stitch density.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SECTION: BUTTON SEWING ===== -->
+            <div class="col-12"><div class="cat-heading">Button Sewing Machines</div></div>
+
+            <!-- MB-1370 Series -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="button" data-aos="fade-up" data-aos-delay="50">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag button">Button Sewing</span>
+                        <img src="https://www.juki.co.jp/industrial_e/admin/pdata/productphoto/20210217_155719_01.jpg" alt="MB-1370 Series" onerror="this.src='https://www.juki.co.jp/industrial_e/admin/pdata/productphoto/20210113_071219_01.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>MB-1370 Series</h3>
+                        <p>High-speed computerized button sewing machine for 2-hole and 4-hole buttons (size 10–28 mm). Built-in patterns with wrapping and automatic thread trimming.</p>
+                        <button class="btn-enquire" onclick="openModal('MB-1370 Series','https://www.juki.co.jp/industrial_e/admin/pdata/productphoto/20210217_155719_01.jpg','Button Sewing','Computerized Button Sewing','1,500 sti/min','Button Size: 10–28 mm','Automatic','High-speed computerized button sewing machine for 2 and 4-hole buttons. Built-in stitch patterns with wrapping, shank formation, and automatic thread trimming.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LK-1903C -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="button" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag button">Button Sewing</span>
+                        <img src="https://api.jukieurope.com/file/stream/97415db3-e78c-11ef-b5a7-0cc47a82bb04" alt="LK-1903C" onerror="this.src='https://www.juki.co.jp/industrial_e/admin/pdata/productphoto/20210113_071219_01.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>LK-1903C</h3>
+                        <p>Computerized button sewing machine with advanced pattern programming. Supports snap button fasteners and special button types for diverse garment applications.</p>
+                        <button class="btn-enquire" onclick="openModal('LK-1903C','https://api.jukieurope.com/file/stream/97415db3-e78c-11ef-b5a7-0cc47a82bb04','Button Sewing','Advanced Computerized Button Sewing','1,500 sti/min','Button Size: 10–32 mm','Automatic','Computerized button sewing machine with advanced pattern programming. Supports snap button fasteners and special button types for diverse garment production.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SECTION: COVERSTITCH ===== -->
+            <div class="col-12"><div class="cat-heading">Coverstitch Machines</div></div>
+
+            <!-- MF-7200D Series -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="coverstitch" data-aos="fade-up" data-aos-delay="50">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag coverstitch">Coverstitch</span>
+                        <img src="https://tiimg.tistatic.com/fp/1/004/023/mf-7200d-series-coverstitch-machine-688.jpg" alt="MF-7200D Series" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>MF-7200D Series</h3>
+                        <p>High-speed flat seamer/coverstitch machine for hemming knitwear and T-shirts. Speed: 6,500 SPM. Clean top-and-bottom cover stitch for professional finish.</p>
+                        <button class="btn-enquire" onclick="openModal('MF-7200D Series','https://tiimg.tistatic.com/fp/1/004/023/mf-7200d-series-coverstitch-machine-688.jpg','Coverstitch','Flat Seamer / Coverstitch','6,500 sti/min','1–4 mm','Automatic','High-speed flat seamer/coverstitch machine for hemming knitwear and T-shirts. Produces clean top-and-bottom cover stitch for professional finish.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MF-7900 Series -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="coverstitch" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag coverstitch">Coverstitch</span>
+                        <img src="https://juki.com/media/catalog/product/cache/2b497b866f8a9f887e9640d769ece67d/m/f/mf7900u11_2.jpg" alt="MF-7900 Series" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>MF-7900 Series</h3>
+                        <p>Advanced coverstitch/flat seamer with multiple needle configurations (H11, H22, H24). Ideal for waistbands, cuffs, and decorative stitching on stretch fabrics.</p>
+                        <button class="btn-enquire" onclick="openModal('MF-7900 Series','https://juki.com/media/catalog/product/cache/2b497b866f8a9f887e9640d769ece67d/m/f/mf7900u11_2.jpg','Coverstitch','Advanced Coverstitch / Flat Seamer','6,000 sti/min','1–4 mm','Automatic','Advanced coverstitch/flat seamer with multiple needle configurations. Ideal for waistbands, cuffs, and decorative stitching on stretch and knit fabrics.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MF-7500 Series -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="coverstitch" data-aos="fade-up" data-aos-delay="150">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag coverstitch">Coverstitch</span>
+                        <img src="https://juki.com/media/catalog/product/m/f/mf7500.jpg" alt="MF-7500 Series" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>MF-7500 / MF-7500D Series</h3>
+                        <p>Compact coverstitch for smaller-scale production and sampling. Multiple configurations (C11, E11) for versatile decorative and functional hemming applications.</p>
+                        <button class="btn-enquire" onclick="openModal('MF-7500 / MF-7500D Series','https://juki.com/media/catalog/product/m/f/mf7500.jpg','Coverstitch','Compact Coverstitch','6,000 sti/min','1–4 mm','Automatic','Compact coverstitch for smaller-scale production and sampling. Multiple C11 and E11 configurations for versatile decorative and functional hemming.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SECTION: ZIGZAG ===== -->
+            <div class="col-12"><div class="cat-heading">Zigzag Stitching Machines</div></div>
+
+            <!-- LZ-2290C-7 Series -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="zigzag" data-aos="fade-up" data-aos-delay="50">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag zigzag">Zigzag</span>
+                        <img src="https://5.imimg.com/data5/RD/VV/RN/SELLER-33579000/25.jpg" alt="LZ-2290C-7 Series" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>LZ-2290C-7 Series</h3>
+                        <p>Computerized zigzag machine with digital control panel. Supports multiple stitch widths up to 10mm. Used for embellishment and stretch seam applications.</p>
+                        <button class="btn-enquire" onclick="openModal('LZ-2290C-7 Series','https://5.imimg.com/data5/RD/VV/RN/SELLER-33579000/25.jpg','Zigzag','Computerized Zigzag','5,000 sti/min','Up to 10 mm (width)','Automatic','Computerized zigzag machine with digital control panel. Supports multiple stitch widths. Used for stretch seams, embellishments, and special decorative applications.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LZ-2284A -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="zigzag" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag zigzag">Zigzag</span>
+                        <img src="https://5.imimg.com/data5/VY/MW/MY-47969317/screen-shot-2018-02-21-at-10-52-32-pm.png" alt="LZ-2284A" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>LZ-2284A-7 / LZ-2284A</h3>
+                        <p>Standard high-speed zigzag machine for general garment production. Ideal for elastic attachment, lingerie, and stretch fabric edge finishing.</p>
+                        <button class="btn-enquire" onclick="openModal('LZ-2284A-7 / LZ-2284A','https://5.imimg.com/data5/VY/MW/MY-47969317/screen-shot-2018-02-21-at-10-52-32-pm.png','Zigzag','High-Speed Zigzag','4,500 sti/min','Up to 8 mm (width)','Automatic','Standard high-speed zigzag machine for garment production. Ideal for elastic attachment, lingerie production, and stretch fabric edge finishing.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SECTION: AUTOMATIC MACHINES ===== -->
+            <div class="col-12"><div class="cat-heading">Automatic Sewing Machines</div></div>
+
+            <!-- AB-1351 -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="automatic" data-aos="fade-up" data-aos-delay="50">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag automatic">Automatic</span>
+                        <img src="https://tiimg.tistatic.com/fp/1/004/023/ab-1351-automatic-1-needle-belt-loop-attaching-machine-674.jpg" alt="AB-1351" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>AB-1351</h3>
+                        <p>Automated belt loop attaching machine. Precisely attaches belt loops with consistent positioning and stitch strength for denim and trouser production.</p>
+                        <button class="btn-enquire" onclick="openModal('AB-1351','https://tiimg.tistatic.com/fp/1/004/023/ab-1351-automatic-1-needle-belt-loop-attaching-machine-674.jpg','Automatic','Belt Loop Attaching Machine','—','—','Automatic','Automated belt loop attaching machine. Precisely attaches belt loops with consistent positioning and stitch strength for denim and trouser production.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AMB-289 -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="automatic" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag automatic">Automatic</span>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDm6cDa7Dtj8q-rlSUkKIVzbxlSfooZANgAQ&s" alt="AMB-289" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>AMB-289</h3>
+                        <p>Automatic sleeve setting machine. Precisely attaches sleeves to garment bodies with programmed sewing paths for consistent quality in shirt manufacturing.</p>
+                        <button class="btn-enquire" onclick="openModal('AMB-289','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDm6cDa7Dtj8q-rlSUkKIVzbxlSfooZANgAQ&s','Automatic','Automatic Sleeve Setting Machine','—','—','Automatic','Automatic sleeve setting machine with programmed sewing paths. Ensures consistent quality sleeve attachment in shirt and jacket manufacturing.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PS-800 Series -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="automatic" data-aos="fade-up" data-aos-delay="150">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag automatic">Automatic</span>
+                        <img src="https://5.imimg.com/data5/SELLER/Default/2023/6/319549850/TF/HK/SV/191687627/juki-ps-800-pattern-seamer-sewing-machine.jpg" alt="PS-800 Series" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>PS-800 Series</h3>
+                        <p>Automatic pocket setting machine for casual and formal trousers. Fully programmable pocket placement with auto fabric handler and trimmer.</p>
+                        <button class="btn-enquire" onclick="openModal('PS-800 Series','https://5.imimg.com/data5/SELLER/Default/2023/6/319549850/TF/HK/SV/191687627/juki-ps-800-pattern-seamer-sewing-machine.jpg','Automatic','Pocket Setting Machine','—','—','Automatic','Automatic pocket setting machine for casual and formal trousers. Fully programmable pocket placement with automatic fabric handler and thread trimmer.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MOL-254 -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="automatic" data-aos="fade-up" data-aos-delay="200">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag automatic">Automatic</span>
+                        <img src="https://tiimg.tistatic.com/fp/1/007/305/mol254-automatic-2-needle-belt-loop-attaching-machine-389.jpg" alt="MOL-254" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>MOL-254 / MOL-254N</h3>
+                        <p>Automatic body-size measurement system linked with sewing machines. Enables precise garment size tracking for smart factory production management.</p>
+                        <button class="btn-enquire" onclick="openModal('MOL-254 / MOL-254N','https://tiimg.tistatic.com/fp/1/007/305/mol254-automatic-2-needle-belt-loop-attaching-machine-389.jpg','Automatic','Automatic Measurement & Linking System','—','—','Automatic','Automatic body-size measurement system linked with sewing equipment. Enables precise garment size tracking and smart factory production management.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SECTION: NON-APPAREL ===== -->
+            <div class="col-12"><div class="cat-heading">Non-Apparel Sewing Machines</div></div>
+
+            <!-- DNU-1541 -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="nonapparel" data-aos="fade-up" data-aos-delay="50">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag nonapparel">Non-Apparel</span>
+                        <img src="https://5.imimg.com/data5/ANDROID/Default/2025/12/565013121/AR/AJ/TG/107687763/product-jpeg.jpg" alt="DNU-1541" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>DNU-1541 Series</h3>
+                        <p>Flatbed compound needle-feed machine for heavy materials. Ideal for leather goods, bags, upholstery, safety belts, and heavy canvas applications.</p>
+                        <button class="btn-enquire" onclick="openModal('DNU-1541 Series','https://5.imimg.com/data5/ANDROID/Default/2025/12/565013121/AR/AJ/TG/107687763/product-jpeg.jpg','Non-Apparel','Flatbed Compound Feed (Heavy Duty)','2,500 sti/min','8 mm','Automatic','Flatbed compound needle-feed machine for heavy materials. Ideal for leather goods, bags, upholstery, safety belts, and heavy canvas applications.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LU-2800V-7 Series -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="nonapparel" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag nonapparel">Non-Apparel</span>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR71wMLotbS5n8YxmSnvk_LKDDd_57-8Vs12g&s" alt="LU-2800V-7 Series" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>LU-2800V-7 Series</h3>
+                        <p>Walking-foot flatbed machine with digital control. Versatile heavy-duty sewing for footwear, leather goods, and industrial fabric applications.</p>
+                        <button class="btn-enquire" onclick="openModal('LU-2800V-7 Series','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR71wMLotbS5n8YxmSnvk_LKDDd_57-8Vs12g&s','Non-Apparel','Walking Foot Flatbed (Digital)','2,500 sti/min','8 mm','Automatic','Walking-foot flatbed machine with digital control. Versatile heavy-duty sewing for footwear, leather goods, and industrial fabric applications.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PLC-2700V-7 Series -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="nonapparel" data-aos="fade-up" data-aos-delay="150">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag nonapparel">Non-Apparel</span>
+                        <img src="https://juki.com/media/catalog/product/cache/0026169b53abef45edbca0c19dcaa127/p/l/plc2700v_7_photo_white.jpg" alt="PLC-2700V-7 Series" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>PLC-2700V-7 Series</h3>
+                        <p>Post-bed compound feed machine for boots, shoes, and 3D shaped articles. Digital motor for precise stitch length control in curved seam applications.</p>
+                        <button class="btn-enquire" onclick="openModal('PLC-2700V-7 Series','https://juki.com/media/catalog/product/cache/0026169b53abef45edbca0c19dcaa127/p/l/plc2700v_7_photo_white.jpg','Non-Apparel','Post-Bed Compound Feed (Digital)','2,500 sti/min','Up to 8 mm','Automatic','Post-bed compound feed machine for boots, shoes, and 3D shaped articles. Digital motor enables precise stitch length control in curved seam applications.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LS-2342 Series -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="nonapparel" data-aos="fade-up" data-aos-delay="200">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag nonapparel">Non-Apparel</span>
+                        <img src="https://juki.com/media/catalog/product/l/s/ls2342_7_photo1.jpg" alt="LS-2342 Series" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>LS-2342 Series</h3>
+                        <p>Cylinder-bed lockstitch machine for cuffs, waistbands, boots, and tubular products. Compound needle feed for challenging cylindrical sewing operations.</p>
+                        <button class="btn-enquire" onclick="openModal('LS-2342 Series','https://juki.com/media/catalog/product/l/s/ls2342_7_photo1.jpg','Non-Apparel','Cylinder-Bed Lockstitch','3,000 sti/min','Up to 7 mm','Automatic','Cylinder-bed lockstitch machine for cuffs, waistbands, boots, and tubular products. Compound needle feed for challenging cylindrical sewing operations.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SECTION: DIGITAL ===== -->
+            <div class="col-12"><div class="cat-heading">Digital / Smart Machines</div></div>
+
+            <!-- DDL-9000C Digital -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="digital" data-aos="fade-up" data-aos-delay="50">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag digital">Digital</span>
+                        <img src="https://juki.com/media/catalog/product/cache/2b497b866f8a9f887e9640d769ece67d/d/d/ddl9000c_photo1.jpg" alt="DDL-9000C Digital">
+                    </div>
+                    <div class="product-body">
+                        <h3>DDL-9000C (Digital Apparel)</h3>
+                        <p>Full-digital sewing system with IoT connectivity. Sewing data transferable to Android tablet via NFC. All parameters digitally managed and reproducible.</p>
+                        <button class="btn-enquire" onclick="openModal('DDL-9000C (Digital Apparel)','https://juki.com/media/catalog/product/cache/2b497b866f8a9f887e9640d769ece67d/d/d/ddl9000c_photo1.jpg','Digital','Full Digital IoT-Connected Machine','5,000 sti/min','5 mm','Semi-dry','Full-digital sewing system with IoT connectivity. Sewing parameters transferable to Android tablet via NFC. All adjustments digitally managed, stored, and reproducible.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LBH-1790AN Digital -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="digital" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag digital">Digital</span>
+                        <img src="https://5.imimg.com/data5/SELLER/Default/2024/1/375833328/UH/FI/CU/160862975/whatsapp-image-2024-01-08-at-11-02-38-am-500x500.jpeg" alt="LBH-1790AN Digital" onerror="this.src='https://apparelresources.com/wp-content/uploads/2014/11/juki1-copy.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>LBH-1790AN (Digital Apparel)</h3>
+                        <p>Computerized buttonhole with digital network integration. Stitch data linked to Juki's production management system for smart factory operations.</p>
+                        <button class="btn-enquire" onclick="openModal('LBH-1790AN (Digital Apparel)','https://5.imimg.com/data5/SELLER/Default/2024/1/375833328/UH/FI/CU/160862975/whatsapp-image-2024-01-08-at-11-02-38-am-500x500.jpeg','Digital','Digital Buttonhole with Network Integration','4,200 sti/min','0.5–40 mm','Semi-dry','Computerized buttonhole with digital network integration. Stitch data linked to Juki smart production management system for fully connected factory operations.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LU-2800V Digital Non-Apparel -->
+            <div class="col-lg-3 col-md-4 col-sm-6 product-item" data-category="digital" data-aos="fade-up" data-aos-delay="150">
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <span class="prod-tag digital">Digital</span>
+                        <img src="https://portexgrup.com/wp-content/uploads/lu-2800v-7_series_photo_15.jpg" alt="LU-2800V-7 Digital" onerror="this.src='https://5.imimg.com/data5/SELLER/Default/2021/10/SC/SD/VY/4047003/juki-ddl-8700-industrial-sewing-machine-500x500.jpg'">
+                    </div>
+                    <div class="product-body">
+                        <h3>LU-2800V-7 (Digital Non-Apparel)</h3>
+                        <p>Digital non-apparel walking-foot machine with servo motor. Smart parameter control for leather and heavy industrial fabric production with data logging.</p>
+                        <button class="btn-enquire" onclick="openModal('LU-2800V-7 (Digital Non-Apparel)','https://portexgrup.com/wp-content/uploads/lu-2800v-7_series_photo_15.jpg','Digital','Digital Non-Apparel Walking Foot','2,500 sti/min','Up to 8 mm','Automatic','Digital non-apparel walking-foot machine with servo motor and smart parameter control. Ideal for leather and heavy industrial fabric with built-in data logging.')">Enquire Now</button>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /row -->
+    </div>
+</section>
+
+<!-- ===== SINGLE SHARED MODAL ===== -->
+<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold" id="productModalLabel" style="font-size:1rem;"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-0">
+        <div class="row g-0">
+          <!-- LEFT IMAGE -->
+          <div class="col-lg-5 modal-img-wrap">
+            <img id="pImage" class="img-fluid" alt="Product Image" style="max-height:380px; object-fit:contain;">
+          </div>
+          <!-- RIGHT CONTENT -->
+          <div class="col-lg-7 p-4">
+            <h4 id="pTitle" class="fw-bold mb-1" style="color:var(--smx-dark); font-size:1.15rem;"></h4>
+            <p id="pDesc" class="text-muted mb-3" style="font-size:0.85rem; line-height:1.7;"></p>
+            <!-- SPEC TABLE -->
+            <table class="table table-sm table-bordered mb-4">
+              <tbody id="pSpecs"></tbody>
+            </table>
+            <!-- ENQUIRY FORM -->
+            <div class="border-top pt-3">
+              <h6 class="fw-bold mb-3" style="color:var(--smx-blue);">Send Enquiry</h6>
+              <div class="row g-2">
+                <div class="col-md-6">
+                  <input type="text" class="form-control form-control-sm" placeholder="Your Name" id="enquiryName">
+                </div>
+                <div class="col-md-6">
+                  <input type="tel" class="form-control form-control-sm" placeholder="Mobile Number" id="enquiryPhone">
+                </div>
+                <div class="col-12">
+                  <input type="email" class="form-control form-control-sm" placeholder="Email Address" id="enquiryEmail">
+                </div>
+                <div class="col-12">
+                  <textarea class="form-control form-control-sm" rows="2" placeholder="Message" id="enquiryMessage"></textarea>
+                </div>
+                <div class="col-12 text-end">
+                  <button class="btn btn-sm px-4 fw-bold" style="background:var(--smx-green); color:white; border-radius:30px;" onclick="submitEnquiry()">
+                    <i class="fa-solid fa-paper-plane me-2"></i>Send Enquiry
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY JUKI -->
+<section class="why-banner">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="section-label" style="color:var(--smx-cyan);">The Juki Difference</span>
+            <h2 class="fw-bold" style="font-size:2rem;">Built for Industrial Performance</h2>
+        </div>
+        <div class="row g-0 text-center">
+            <div class="col-md-3 why-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="why-icon mx-auto"><i class="fa-solid fa-bolt-lightning"></i></div>
+                <h6>High Speed</h6>
+                <p>Up to 5,500–8,000 SPM depending on model. Consistent stitching at peak speeds without skips.</p>
+            </div>
+            <div class="col-md-3 why-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="why-icon mx-auto"><i class="fa-solid fa-microchip"></i></div>
+                <h6>Smart Technology</h6>
+                <p>Computerized direct-drive motors for energy savings, lower noise, and precision stitch control.</p>
+            </div>
+            <div class="col-md-3 why-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="why-icon mx-auto"><i class="fa-solid fa-wrench"></i></div>
+                <h6>Low Maintenance</h6>
+                <p>Self-lubricating components and automatic oiling systems reduce downtime and service costs.</p>
+            </div>
+            <div class="col-md-3 why-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="why-icon mx-auto"><i class="fa-solid fa-puzzle-piece"></i></div>
+                <h6>Wide Application</h6>
+                <p>From delicate silks to heavy denim — Juki has a specialized machine for every fabric and use case.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="main-footer">
+    <div class="container footer-content">
+        <div class="row g-5">
+            <div class="col-lg-4">
+                <img src="smx1.png" alt="SMX India Logo" style="width:150px;">
+                <p class="opacity-75 mt-3">
+                    Leading the Indian market with premium industrial sewing and embroidery technology since 1994.
+                </p>
+                <div class="d-flex gap-3 mt-4">
+                    <a href="https://www.facebook.com/Smxindia/" class="btn btn-outline-light btn-sm rounded-circle"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/smxindia" class="btn btn-outline-light btn-sm rounded-circle"><i class="fab fa-instagram"></i></a>
+                    <a href="https://api.whatsapp.com/send?phone=917506625436" class="btn btn-outline-light btn-sm rounded-circle"><i class="fab fa-whatsapp"></i></a>
+                    <a href="mailto:smxindia15@gmail.com" class="btn btn-outline-light btn-sm rounded-circle"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="https://www.youtube.com/@smxindia" class="btn btn-outline-light btn-sm rounded-circle"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.linkedin.com/company/sewing-machine-exchange-india/" class="btn btn-outline-light btn-sm rounded-circle"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-2 footer-links">
+                <h6 class="footer-heading">Company</h6>
+                <a href="#">About Us</a>
+                <a href="#brands">Our Brands</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="col-lg-6 footer-contact-info">
+                <h6 class="footer-heading">Support</h6>
+                <p class="mb-2"><i class="fa-solid fa-envelope me-2"></i> smxindia15@gmail.com</p>
+                <p class="mb-2"><i class="fa-solid fa-phone me-2"></i> 7506625436 / 9324613436</p>
+                <p class="mb-2"><i class="fa-solid fa-location-dot me-2"></i>
+                    The Tarun Plastic Estate, Andheri East,<br> Mumbai, Maharashtra 400069
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, once: true, easing: 'ease-out-cubic' });
+
+    // ---- FILTER FUNCTION ----
+    function filterCards(category, btn) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const items = document.querySelectorAll('.product-item');
+        const headings = document.querySelectorAll('.cat-heading');
+        let count = 0;
+        items.forEach(item => {
+            const match = category === 'all' || item.dataset.category === category;
+            item.style.display = match ? '' : 'none';
+            if (match) count++;
+        });
+        // Show/hide category headings: only show if at least one product in that category is visible
+        if (category === 'all') {
+            headings.forEach(h => h.parentElement.style.display = '');
+        } else {
+            headings.forEach(h => h.parentElement.style.display = 'none');
+        }
+        document.getElementById('results-count').textContent =
+            `Showing ${count} product${count !== 1 ? 's' : ''}`;
+    }
+
+    // ---- SINGLE MODAL FUNCTION ----
+    function openModal(title, imgSrc, category, type, speed, stitchLen, lubrication, desc) {
+        document.getElementById('productModalLabel').textContent = title;
+        document.getElementById('pTitle').textContent = title;
+        document.getElementById('pImage').src = imgSrc;
+        document.getElementById('pDesc').textContent = desc;
+
+        document.getElementById('pSpecs').innerHTML = `
+            <tr><td><strong>Brand</strong></td><td>Juki</td></tr>
+            <tr><td><strong>Category</strong></td><td>${category}</td></tr>
+            <tr><td><strong>Machine Type</strong></td><td>${type}</td></tr>
+            <tr><td><strong>Max Speed</strong></td><td>${speed}</td></tr>
+            <tr><td><strong>Max Stitch Length</strong></td><td>${stitchLen}</td></tr>
+            <tr><td><strong>Lubrication</strong></td><td>${lubrication}</td></tr>
+            <tr><td><strong>Availability</strong></td><td><span class="badge" style="background:var(--smx-green);">In Stock</span></td></tr>
+        `;
+
+        // Pre-fill enquiry message
+        document.getElementById('enquiryMessage').value = `I am interested in the ${title}. Please provide pricing and availability details.`;
+
+        var modal = new bootstrap.Modal(document.getElementById('productModal'));
+        modal.show();
+    }
+
+    function submitEnquiry() {
+        const name = document.getElementById('enquiryName').value;
+        const phone = document.getElementById('enquiryPhone').value;
+        const email = document.getElementById('enquiryEmail').value;
+        const product = document.getElementById('productModalLabel').textContent;
+        if (!name || !phone) {
+            alert('Please enter your name and mobile number.');
+            return;
+        }
+        const waMsg = encodeURIComponent(`Hi SMX India!\n\nProduct Enquiry: ${product}\nName: ${name}\nPhone: ${phone}\nEmail: ${email || 'Not provided'}\n\nI would like more information about this product.`);
+        window.open(`https://api.whatsapp.com/send?phone=917506625436&text=${waMsg}`, '_blank');
+    }
+</script>
+</body>
+</html>
